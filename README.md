@@ -1,6 +1,6 @@
 # Начало работы с Lua в Neovim
 
-## Table of Contents
+## Содержание
 
 * [Введение](#введение)
   * [Изучение языка Lua](#изучение-lua)
@@ -61,10 +61,10 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 ## Введение
 
-Интеграция Lua в Neovim в качестве языка с первоклассной поддержкой превращает её в одну из важнейших особенностей редактора. Тем не менее, количество учебного материалов по написанию плагинов на Lua значительно меньше таковых на Vimscript.
+Интеграция Lua в Neovim в качестве языка с первоклассной поддержкой превращает её в одну из важнейших особенностей редактора. Тем не менее, количество учебных материалов по написанию плагинов на Lua значительно меньше таковых на Vimscript.
 Это руководство является попыткой предоставления необходимой информации для написания плагинов на Lua.
 
-Это руководство предполагает, что пользователь использует последнюю версию neovim [nightly build](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
+Это руководство предполагает, что пользователь использует последнюю версию Neovim [nightly build](https://github.com/neovim/neovim/releases/tag/nightly).
 Так как версия 0.5 Neovim находится на стадии разработки, имейте в виду, что API, которые находятся в активной разработке нестабильны и могут быть подвержены изменениям до релиза.
 
 ### Изучение Lua
@@ -148,11 +148,10 @@ require('other_modules/anothermodule')
 
 Разделители путей обозначены либо точкой `.` либо слэшем `/`.
 
-A folder containing an `init.lua` file can be required directly, without having to specify the name of the file.
 Папка содержащая файл `init.lua` может быть загружена напрямую без необходимости уточнять имя файла.
 
 ```lua
-require('other_modules') -- loads other_modules/init.lua
+require('other_modules') -- загружает other_modules/init.lua
 ```
 
 Для большей информации: `:help lua-require`
@@ -176,9 +175,9 @@ require('other_modules') -- loads other_modules/init.lua
 
 **Обновление**: если вы используете последнюю ночную сборку, это [больше не проблема] (https://github.com/neovim/neovim/pull/13119), и вы можете спокойно пропустить этот раздел.
 
-Если вы используете функцию `packages` или основанного на ней менеджера подключаемых модулей (например, [packer.nvim] (https://github.com/wbthomason/packer.nvim), [minpac] (https://github.com/k-takata/minpac) или [vim-packager] (https://github.com/kristijanhusak/vim-packager/)), при использовании плагинов Lua следует помнить о некоторых вещах.
+Если вы используете функцию `packages` или основанного на ней менеджера подключаемых модулей (например, [packer.nvim](https://github.com/wbthomason/packer.nvim), [minpac](https://github.com/k-takata/minpac) или [vim-packager](https://github.com/kristijanhusak/vim-packager/)), при использовании плагинов Lua следует помнить о некоторых вещах.
 
-Пакеты в папке `start` загружаются только после загрузки вашего `init.vim`. Это означает, что пакет не добавляется в `runtimepath` до тех пор, пока Neovim не закончит обработку файла. Это может вызвать проблемы, если плагин ожидает, что вы загрузите(`require`)  модуль Lua или вызовете автоматически загружаемую функцию.
+Пакеты в папке `start` загружаются только после считывания вашего `init.vim`. Это означает, что пакет не добавляется в `runtimepath` до тех пор, пока Neovim не закончит обработку файла. Это может вызвать проблемы, если плагин ожидает, что вы загрузите(`require`)  модуль Lua или вызовете автоматически загружаемую функцию.
 
 Предполагая, что в пакете `start/foo` есть файл `lua/bar.lua`, выполнение кода ниже в `init.vim` вызовет ошибку, потому что `runtimepath` еще не обновлен:
 
@@ -193,7 +192,7 @@ packadd! foo
 lua require('bar')
 ```
 
-Добавление `!` к `packadd` означает, что Neovim поместит пакет в `runtimepath` без закрузки каких-либо скриптов в его папках `plugin` или `ftdetect`.
+Добавление `!` к `packadd` означает, что Neovim поместит пакет в `runtimepath` без загрузки каких-либо скриптов в его папках `plugin` или `ftdetect`.
 
 Также смотрите:
 - `:help :packadd`
@@ -209,7 +208,6 @@ lua require('bar')
 :lua require('myluamodule')
 ```
 
-Multi-line scripts are possible using heredoc syntax:
 Многострочные скрипты возможны с использованием синтаксиса heredoc:
 
 ```vim
@@ -232,7 +230,7 @@ EOF
 ```vim
 :lua local foo = 1
 :lua print(foo)
-" prints 'nil' instead of '1'
+" выводит 'nil' вместо '1'
 ```
 
 Примечание 2: функция `print()` в Lua ведет себя аналогично команде `:echomsg`. Его вывод сохраняется в истории сообщений и может быть подавлен командой `:silent`.
@@ -244,7 +242,6 @@ EOF
 
 ### :luado
 
-This command executes a chunk of Lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
 Эта команда выполняет фрагмент кода Lua, который воздействует на диапазон строк в текущем буфере. Если диапазон не указан, вместо него используется весь буфер. Строка возвращаемая из блока, используется для определения того, чем должна быть заменена каждая строка в диапазоне.
 
 Следующая команда заменит каждую строку в текущем буфере текстом `hello world`:
@@ -253,7 +250,6 @@ This command executes a chunk of Lua code that acts on a range of lines in the c
 :luado return 'hello world'
 ```
 
-Two implicit `line` and `linenr` variables are also provided. `line` is the text of the line being iterated upon whereas `linenr` is its number. The following command would make every line whose number is divisible by 2 uppercase:
 Также предусмотрены две неявные переменные `line` и `linenr`. `line` - это текст строки, по которой выполняется итерация, а `linenr` - ее номер. Следующая команда сделает каждую строку, номер которой делится на 2, в верхний регистр:
 
 ```vim
@@ -285,12 +281,9 @@ Two implicit `line` and `linenr` variables are also provided. `line` is the text
 - `require()`:
     - это встроенная функция Lua. Это позволяет вам использовать модульную систему Lua
     - ищет модули в папках `lua` в вашем `runtimepath`
-    - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
     - отслеживает, какие модули были загружены, и предотвращает повторный парсинг и выполнение скрипта. Если вы измените файл, содержащий код для модуля, и попытаетесь `require()` второй раз во время работы Neovim, модуль на самом деле не будет обновляться
 - `:luafile`:
-    - is an Ex command. It does not support modules
     - является Ex командой. Не поддерживает модули
-    - takes a path that is either absolute or relative to the working directory of the current window
     - принимает абсолютный или относительный путь к рабочей папке текущего окна
     - выполняет содержимое скрипта независимо от того, выполнялся ли он раньше
 
@@ -584,7 +577,6 @@ vim.api.nvim_set_option('updatetime', 3000)
 print(vim.api.nvim_get_option('updatetime')) -- 3000
 ```
 
-Buffer-local and window-local options also need a buffer number or a window number (using `0` will set/get the option for the current buffer/window):
 Локальные опции буффера и окна также нуждаются в номере буфера или номере окна (использование `0` установит/получит опцию для текущего буфера/окна)
 
 ```lua
@@ -617,14 +609,14 @@ vim.bo[4].expandtab = true -- тоже самое что и vim.api.nvim_buf_set
 vim.wo.number = true -- тоже самое что и vim.api.nvim_win_set_option(0, 'number', true)
 ```
 
-Смотрите также:
+Также смотрите:
 - `:help lua-vim-internal-options`
 
 #### Предостережения
 
 В Lua нет эквивалента команде `:set`, вы либо устанавливаете параметр глобально, либо локально.
 
-Смотрите также:
+Также смотрите:
 - `:help :setglobal`
 - `:help global-local`
 
@@ -785,7 +777,7 @@ if has('nvim')
 endif
 ```
 
-Однако в Lua ложными считаются только false и nil, числа всегда оцениваются как true, независимо от их значения. Вы должны явно проверить `1` или `0`:
+Однако в Lua ложными считаются только `false` и `nil`, числа всегда оцениваются как `true`, независимо от их значения. Вы должны явно проверить `1` или `0`:
 
 ```lua
 if vim.fn.has('nvim') == 1 then
@@ -910,7 +902,7 @@ globals = {
 
 Языковой сервер [Alloyed/lua-lsp](https://github.com/Alloyed/lua-lsp/) использует luacheck для обеспечения линтинга и читает тот же файл.
 
-Для получения дополнительной информации о том, как настроить `luacheck`, обратитесь к его [документации] (https://luacheck.readthedocs.io/en/stable/config.html)
+Для получения дополнительной информации о том, как настроить `luacheck`, обратитесь к его [документации](https://luacheck.readthedocs.io/en/stable/config.html)
 
 #### sumneko/lua-language-server
 
@@ -954,7 +946,7 @@ require'lspconfig'.sumneko_lua.setup {
 - `vim.validate()`?
 - Добавить материал о модульных тестах? Я знаю, что Neovim использует фреймворк [busted](https://olivinelabs.com/busted/), но я не знаю, как использовать его для плагинов.
 - Лучшие практики? Я не Lua мастер, поэтому не знаю
-- Как использовать пакеты LuaRocks ([wbthomason / packer.nvim](https://github.com/wbthomason/packer.nvim)?)
+- Как использовать пакеты LuaRocks ([wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)?)
 
 ## Разное
 
@@ -966,7 +958,7 @@ require'lspconfig'.sumneko_lua.setup {
 - [Luv documentation](https://github.com/luvit/luv/blob/master/docs.md)
 - [teukka.tech - Using LibUV in Neovim](https://teukka.tech/vimloop.html)
 
-See also:
+Также смотрите:
 - `:help vim.loop`
 
 ### vim.lsp
@@ -978,18 +970,18 @@ See also:
 - [neovim/neovim#12655](https://github.com/neovim/neovim/pull/12655)
 - [How to migrate from diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim/issues/73#issue-737897078)
 
-You may also want to take a look at plugins built around the LSP client:
+Вы также можете взглянуть на плагины, построенные вокруг клиента LSP:
 - [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
 - [RishabhRD/nvim-lsputils](https://github.com/RishabhRD/nvim-lsputils)
 
-See also:
+Также смотрите:
 - `:help lsp`
 
 ### vim.treesitter
 
-`vim.treesitter` - это модуль, который управляет интеграцией библиотеки [Tree-sitter] (https://tree-sitter.github.io/tree-sitter/) в Neovim. Если вы хотите узнать больше о Tree-sitter, вам может быть интересна эта [презентация (38:37)] (https://www.youtube.com/watch?v=Jes3bD6P0To).
+`vim.treesitter` - это модуль, который управляет интеграцией библиотеки [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) в Neovim. Если вы хотите узнать больше о Tree-sitter, вам может быть интересна эта [презентация (38:37)](https://www.youtube.com/watch?v=Jes3bD6P0To).
 
-Организация [nvim-treeitter] (https://github.com/nvim-treesitter/) размещает различные плагины, использующие преимущества библиотеки.
+Организация [nvim-treeitter](https://github.com/nvim-treesitter/) размещает различные плагины, использующие преимущества библиотеки.
 
 See also:
 - `:help lua-treesitter`
@@ -1000,9 +992,11 @@ See also:
 
 - [Moonscript](https://moonscript.org/)
 
-Вероятно, один из самых известных транспилеров для Lua. Добавляет множество удобных функций, таких как классы, списковое включение или функциональные литералы. Плагин [svermeulen/nvim-moonmaker] (https://github.com/svermeulen/nvim-moonmaker) позволяет писать плагины и настройку Neovim непосредственно в Moonscript.
+Вероятно, один из самых известных транспилеров для Lua. Добавляет множество удобных функций, таких как классы, списковое включение или функциональные литералы. Плагин [svermeulen/nvim-moonmaker](https://github.com/svermeulen/nvim-moonmaker) позволяет писать плагины и настройку Neovim непосредственно в Moonscript.
 
 - [Fennel](https://fennel-lang.org/)
+
+Lisp, который компилируется в Lua. Вы можете написать конфигурацию и плагины для Neovim в Fennel с помощью плагина [Olical/aniseed](https://github.com/Olical/aniseed). Кроме того, плагин [Olical/conjure](https://github.com/Olical/conjure) предоставляет интерактивную среду разработки, которая поддерживает Fennel (среди других языков).
 
 Другие интересные проекты:
 - [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
