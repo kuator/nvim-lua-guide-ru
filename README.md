@@ -1,16 +1,10 @@
 # Getting started using Lua in Neovim
 
-## Translations
-
-- [🇨🇳 Chinese version](https://github.com/glepnir/nvim-lua-guide-zh)
-- [🇧🇷 Portuguese version](https://github.com/npxbr/nvim-lua-guide/blob/master/README.pt-br.md)
-- [🇯🇵 Japanesese version](https://github.com/willelz/nvim-lua-guide-ja/blob/master/README.ja.md)
-
 ## Table of Contents
 
-* [Introduction](#introduction)
-  * [Learning Lua](#learning-lua)
-  * [Existing tutorials for writing Lua in Neovim](#existing-tutorials-for-writing-lua-in-neovim)
+* [Введение](#введение)
+  * [Изучение языка Lua](#изучение-luaaaaa)
+  * [Туториалы по использованию Lua в neovim](#туториалы-по-использованию-Lua-в-neovim)
   * [Companion plugins](#companion-plugins)
 * [Where to put Lua files](#where-to-put-lua-files)
   * [init.lua](#initlua)
@@ -65,59 +59,61 @@
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
-## Introduction
+## Введение
 
-The integration of Lua as a first-class language inside Neovim is shaping up to be one of its killer features. However, the amount of teaching material for learning how to write plugins in Lua is not as large as what you would find for writing them in Vimscript. This is an attempt at providing some basic information to get people started.
+Интеграция Lua в Neovim в качестве языка с первоклассной поддержкой превращает её в одну из важнейших особенностей редактора. Тем не менее, количество учебного материалов по написанию плагинов на Lua значительно меньше таковых на Vimscript.
+Это руководство является попыткой предоставления необходимой информации для написания плагинов на Lua.
 
-This guide assumes you are using the latest [nightly build](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim. Since version 0.5 of Neovim is a development version, keep in mind that some APIs that are being actively worked on are not quite stable and might change before release.
+Это руководство предполагает, что пользователь использует последнюю версию neovim [nightly build](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
+Так как версия 0.5 Neovim находится на стадии разработки, имейте в виду, что API, которые находятся в активной разработке нестабильны и могут быть подвержены изменениям до релиза.
 
-### Learning Lua
+### Изучение Lua
 
-If you are not already familiar with the language, there are plenty of resources to get started:
+Если вы незнакомы с языком, имеется большое количество материалов для изучения:
 
-- The [Learn X in Y minutes page about Lua](https://learnxinyminutes.com/docs/lua/) should give you a quick overview of the basics
-- If videos are more to your liking, Derek Banas has a [1-hour tutorial on the language](https://www.youtube.com/watch?v=iMacxZQMPXs)
-- The [lua-users wiki](http://lua-users.org/wiki/LuaDirectory) is full of useful information on all kinds of Lua-related topics
-- The [official reference manual for Lua](https://www.lua.org/manual/5.1/) should give you the most comprehensive tour of the language
+- Ресурс [Learn X in Y minutes page about Lua](https://learnxinyminutes.com/docs/lua/) позволит вам пробежаться по основам языка
+- Если вы предпочитаете видеоуроки, то у Дерека Банаса (Derek Banas) имеется часовой видеоурок [1-hour tutorial on the language](https://www.youtube.com/watch?v=iMacxZQMPXs)
+- Сайт [lua-users wiki](http://lua-users.org/wiki/LuaDirectory) содержит большое количество полезной информации относительно Lua
+- Сайт [official reference manual for Lua](https://www.lua.org/manual/5.1/) должен дать исчерпывающую информацию о языке
 
-It should also be noted that Lua is a very clean and simple language. It is easy to learn, especially if you have experience with similar scripting languages like JavaScript. You may already know more Lua than you realise!
+Следует заметить, что Lua является очень чистым и простым языком. Язык легко изучить, особенно если имеется опыт использования аналогичного скриптового языка наподобие Javascript. Возможно, вы разбираетесь в Lua больше, чем вы представляете!
 
-Note: the version of Lua that Neovim embeds is LuaJIT 2.1.0, which maintains compatibility with Lua 5.1 (with a few 5.2 extensions)
+Заметка: версия Lua, встроенное в Neovim является LuaJIT 2.1.0, что поддерживает совместимость с Lua 5.1 (с некоторыми исключениями в виде расширений версии 5.2)
 
-### Existing tutorials for writing Lua in Neovim
+### Имеющиеся туториалы по написанию плагинов на Lua для Neovim
 
-A few tutorials have already been written to help people write plugins in Lua. Some of them helped quite a bit when writing this guide. Many thanks to their authors.
+Было написано несколько туториалов, чтобы помочь людям написать плагины на Lua. Некоторые из них значительно помогли для написания этого руководства. Большое спасибо их авторам.
 
 - [teukka.tech - From init.vim to init.lua](https://teukka.tech/luanvim.html)
 - [2n.pl - How to write neovim plugins in Lua](https://www.2n.pl/blog/how-to-write-neovim-plugins-in-lua.md)
 - [2n.pl - How to make UI for neovim plugins in Lua](https://www.2n.pl/blog/how-to-make-ui-for-neovim-plugins-in-lua)
 - [ms-jpq - Neovim Async Tutorial](https://ms-jpq.github.io/neovim-async-tutorial/)
 
-### Companion plugins
+### Связанные плагины
 
-- [Vimpeccable](https://github.com/svermeulen/vimpeccable) - Plugin to help write your .vimrc in Lua
-- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - All the lua functions I don't want to write twice
-- [popup.nvim](https://github.com/nvim-lua/popup.nvim) - An implementation of the Popup API from vim in Neovim
+- [Vimpeccable](https://github.com/svermeulen/vimpeccable) - Плагин, помогающий написать .vimrc на Lua
+- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Все функции Lua, которые я не хоче переписывать
+- [popup.nvim](https://github.com/nvim-lua/popup.nvim) - Имплементация API Всплывающих окон vim(vim Popup API) для Neovim
 - [nvim_utils](https://github.com/norcalli/nvim_utils)
-- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - REPL/debug console for nvim lua plugins 
-- [nvim-luapad](https://github.com/rafcamlet/nvim-luapad) - Interactive real time neovim scratchpad for embedded lua engine
-- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Lua Development for Neovim 
-- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - Better Lua syntax highlighting in Vim/NeoVim 
+- [nvim-luadev](https://github.com/bfredl/nvim-luadev) - REPL/дебаг консоль для плагинов Neovim, написанных на lua
+- [nvim-luapad](https://github.com/rafcamlet/nvim-luapad) - Интерактивный Neovim скратчпад для встроенного движка Lua
+- [nlua.nvim](https://github.com/tjdevries/nlua.nvim) - Lua Разработка для Neovim
+- [BetterLua.vim](https://github.com/euclidianAce/BetterLua.vim) - Лучшая синтаксическая подсветка Lua в Vim/NeoVim 
 
-## Where to put Lua files
+## Куда класть файлы Lua
 
 ### init.lua
 
-Neovim supports loading an `init.lua` file for configuration instead of the usual `init.vim`.
+Neovim поддерживает загрузку файла `init.lua` вместо `init.vim` для конфигурации.
 
-See also:
+Для справок:
 - `:help config`
 
-### Other Lua files
+### Другие файлы Lua
 
-Lua files are typically found inside a `lua/` folder in your `runtimepath` (for most users, this will mean `~/.config/nvim/lua` on *nix systems and `~/AppData/Local/nvim/lua` on Windows). You can `require()` these files as Lua modules.
+Файлы Lua обычно находятся внутри папки `lua/` в вашей `runtimepath` (для большинства пользователей это папка `~/.config/nvim/lua` на *nix-овых системах и `~/AppData/Local/nvim/lua` для Windows). Вы можете вызвать эти файлы с помощью `require()` в качестве Lua модулей.
 
-Let's take the following folder structure as an example:
+В качестве примера возьмем следующую структуру папок:
 
 ```text
 📂 ~/.config/nvim
@@ -134,15 +130,15 @@ Let's take the following folder structure as an example:
 └── 🇻 init.vim
 ```
 
-The following Lua code will load `myluamodule.lua`:
+Lua код ниже загрузит модуль `myluamodule.lua`:
 
 ```lua
 require('myluamodule')
 ```
 
-Notice the absence of a `.lua` extension.
+Заметьте отсутствие расширения файла `.lua`.
 
-Similarly, loading `other_modules/anothermodule.lua` is done like so:
+Аналогично, загрузка `other_modules/anothermodule.lua` выполняется следующим образом:
 
 ```lua
 require('other_modules.anothermodule')
@@ -150,69 +146,71 @@ require('other_modules.anothermodule')
 require('other_modules/anothermodule')
 ```
 
-Path separators are denoted by either a dot `.` or a slash `/`.
+Разделители путей обозначены либо точкой `.` либо слэшем `/`.
 
 A folder containing an `init.lua` file can be required directly, without having to specify the name of the file.
+Папка содержащая файл `init.lua` может быть загружена напрямую без необходимости уточнять имя файла.
 
 ```lua
 require('other_modules') -- loads other_modules/init.lua
 ```
 
-For more information: `:help lua-require`
+Для большей информации: `:help lua-require`
 
-#### Caveats
+#### Предостережения
 
-Unlike .vim files, .lua files are not automatically sourced from special directories in your `runtimepath`. For example, Neovim can load `plugin/foo.vim` automatically but not `plugin/foo.lua`.
+В отличие от файлов с расширением .vim, файлы с расширением .lua не загружаются автоматически, если они находятся в специальных папках `runtimepath`. К примеру, Neovim загрузит `plugin/foo.vim`, но не загрузит `plugin/foo.lua`.
 
-See also:
+Также смотрите:
 - [Issue #12670](https://github.com/neovim/neovim/issues/12670)
 
-#### Tips
+#### Советы
 
-Several Lua plugins might have identical filenames in their `lua/` folder. This could lead to namespace clashes.
+Некоторые Lua плагины могут имет идентичные имена файлов внутри папки `lua/`. Это может привести к коллизии пространств имён.
 
-If two different plugins have a `lua/main.lua` file, then doing `require('main')` is ambiguous: which file do we want to source?
+Если два плагина имеют файл `lua/main.lua`, То вызов `require('main')` неопределён: какой файл необходимо загрузить?
 
-It might be a good idea to namespace your config or your plugin with a top-level folder, like so: `lua/plugin_name/main.lua`
+Поэтому это хорошая идея создать пространство имен вашей конфигурации или плагина с помощью папки в самом верхнем уровне, наподобие: `lua/plugin_name/main.lua`
 
-#### A note about packages
+#### Заметка относительно пакетов
 
-**UPDATE**: if you're using the latest nightly build, this is [no longer an issue](https://github.com/neovim/neovim/pull/13119) and you can safely skip this section.
+**Обновление**: если вы используете последнюю ночную сборку, это [больше не проблема] (https://github.com/neovim/neovim/pull/13119), и вы можете спокойно пропустить этот раздел.
 
-If you're a user of the `packages` feature or a plugin manager based on it (such as [packer.nvim](https://github.com/wbthomason/packer.nvim), [minpac](https://github.com/k-takata/minpac) or [vim-packager](https://github.com/kristijanhusak/vim-packager/)), there are things to be aware of when using Lua plugins.
+Если вы используете функцию `packages` или основанного на ней менеджера подключаемых модулей (например, [packer.nvim] (https://github.com/wbthomason/packer.nvim), [minpac] (https://github.com/k-takata/minpac) или [vim-packager] (https://github.com/kristijanhusak/vim-packager/)), при использовании плагинов Lua следует помнить о некоторых вещах.
 
-Packages in the `start` folder are only loaded after sourcing your `init.vim`. This means that a package isn't added to the `runtimepath` until after Neovim has finished processing the file. This can cause issues if a plugin expects you to `require` a Lua module or call an autoloaded function.
+Пакеты в папке `start` загружаются только после загрузки вашего `init.vim`. Это означает, что пакет не добавляется в `runtimepath` до тех пор, пока Neovim не закончит обработку файла. Это может вызвать проблемы, если плагин ожидает, что вы загрузите(`require`)  модуль Lua или вызовете автоматически загружаемую функцию.
 
-Assuming a package `start/foo` has a `lua/bar.lua` file, doing this from your `init.vim` will throw an error because the `runtimepath` hasn't yet been updated:
+Предполагая, что в пакете `start/foo` есть файл `lua/bar.lua`, выполнение кода ниже в `init.vim` вызовет ошибку, потому что `runtimepath` еще не обновлен:
 
 ```vim
 lua require('bar')
 ```
 
-You have to use the `packadd! foo` command before `require`ing the module.
+Вы должны использовать команду `packadd! foo` перед тем как вызвать модуль через `require`.
 
 ```vim
 packadd! foo
 lua require('bar')
 ```
 
-Appending `!` to `packadd` means Neovim will put the package in the `runtimepath` without sourcing any scripts in its `plugin` or `ftdetect` directory.
+Добавление `!` к `packadd` означает, что Neovim поместит пакет в `runtimepath` без закрузки каких-либо скриптов в его папках `plugin` или `ftdetect`.
 
-See also:
+Также смотрите:
 - `:help :packadd`
 - [Issue #11409](https://github.com/neovim/neovim/issues/11409)
 
-## Using Lua from Vimscript
+## Использование Lua в Vimscript
 
 ### :lua
 
-This command executes a chunk of Lua code.
+Эта команда выполняет фрагмент кода Lua.
 
 ```vim
 :lua require('myluamodule')
 ```
 
 Multi-line scripts are possible using heredoc syntax:
+Многострочные скрипты возможны с использованием синтаксиса heredoc:
 
 ```vim
 echo "Here's a bigger chunk of Lua code"
@@ -229,7 +227,7 @@ print(tbl)
 EOF
 ```
 
-Note: each `:lua` command has its own scope and variables declared with the `local` keyword are not accessible outside of the command. This won't work:
+Примечание: каждая команда `:lua` имеет свою собственную область видимости, и переменные, объявленные с ключевым словом `local`, недоступны вне команды. Это не сработает:
 
 ```vim
 :lua local foo = 1
@@ -237,9 +235,9 @@ Note: each `:lua` command has its own scope and variables declared with the `loc
 " prints 'nil' instead of '1'
 ```
 
-Note 2: the `print()` function in Lua behaves similarly to the `:echomsg` command. Its output is saved in the message-history and can be suppressed by the `:silent` command.
+Примечание 2: функция `print()` в Lua ведет себя аналогично команде `:echomsg`. Его вывод сохраняется в истории сообщений и может быть подавлен командой `:silent`.
 
-See also:
+Также смотрите:
 
 - `:help :lua`
 - `:help :lua-heredoc`
@@ -247,51 +245,56 @@ See also:
 ### :luado
 
 This command executes a chunk of Lua code that acts on a range of lines in the current buffer. If no range is specified, the whole buffer is used instead. Whatever string is `return`ed from the chunk is used to determine what each line should be replaced with.
+Эта команда выполняет фрагмент кода Lua, который воздействует на диапазон строк в текущем буфере. Если диапазон не указан, вместо него используется весь буфер. Строка возвращаемая из блока, используется для определения того, чем должна быть заменена каждая строка в диапазоне.
 
-The following command would replace every line in the current buffer with the text `hello world`:
+Следующая команда заменит каждую строку в текущем буфере текстом `hello world`:
 
 ```vim
 :luado return 'hello world'
 ```
 
 Two implicit `line` and `linenr` variables are also provided. `line` is the text of the line being iterated upon whereas `linenr` is its number. The following command would make every line whose number is divisible by 2 uppercase:
+Также предусмотрены две неявные переменные `line` и `linenr`. `line` - это текст строки, по которой выполняется итерация, а `linenr` - ее номер. Следующая команда сделает каждую строку, номер которой делится на 2, в верхний регистр:
 
 ```vim
 :luado if linenr % 2 == 0 then return line:upper() end
 ```
 
-See also:
+Также смотрите:
 
 - `:help :luado`
 
 ### :luafile
 
-This command sources a Lua file.
+Эта команда считывает файл Lua.
 
 ```vim
 :luafile ~/foo/bar/baz/myluafile.lua
 ```
 
-It is analogous to the `:source` command for .vim files or the built-in `dofile()` function in Lua.
+Эта команда аналогична команде `:source` для файлов .vim или встроенной функции `dofile()` в Lua.
 
-See also:
+Также смотрите:
 
 - `:help :luafile`
 
 #### luafile vs require():
 
-You might be wondering what the difference between `lua require()` and `luafile` is and whether you should use one over the other. They have different use cases:
+Вам может быть интересно, в чем разница между `lua require()` и `luafile`, и стоит ли вам использовать одно вместо другого. У них разные варианты использования:
 
 - `require()`:
-    - is a built-in Lua function. It allows you to take advantage of Lua's module system
-    - searches for modules in `lua` folders in your `runtimepath`
+    - это встроенная функция Lua. Это позволяет вам использовать модульную систему Lua
+    - ищет модули в папках `lua` в вашем `runtimepath`
     - keeps track of what modules have been loaded and prevents a script from being parsed and executed a second time. If you change the file containing the code for a module and try to `require()` it a second time while Neovim is running, the module will not actually update
+    - отслеживает, какие модули были загружены, и предотвращает повторный парсинг и выполнение скрипта. Если вы измените файл, содержащий код для модуля, и попытаетесь `require()` второй раз во время работы Neovim, модуль на самом деле не будет обновляться
 - `:luafile`:
     - is an Ex command. It does not support modules
+    - является Ex командой. Не поддерживает модули
     - takes a path that is either absolute or relative to the working directory of the current window
-    - executes the contents of a script regardless of whether it has been executed before
+    - принимает абсолютный или относительный путь к рабочей папке текущего окна
+    - выполняет содержимое скрипта независимо от того, выполнялся ли он раньше
 
-`:luafile` can also be useful if you want run a Lua file you are working on:
+`:luafile` также может быть полезен, если вы хотите запустить файл Lua, над которым вы работаете:
 
 ```vim
 :luafile %
@@ -299,10 +302,10 @@ You might be wondering what the difference between `lua require()` and `luafile`
 
 ### luaeval()
 
-This built-in Vimscript function evaluates a Lua expression string and returns its value. Lua data types are automatically converted to Vimscript types (and vice versa).
+Эта встроенная функция Vimscript оценивает выражение Lua в форме строки и возвращает ее значение. Типы данных Lua автоматически преобразуются в типы Vimscript (и наоборот).
 
 ```vim
-" You can store the result in a variable
+" Вы можете сохранить результат в переменной
 let variable = luaeval('1 + 1')
 echo variable
 " 2
@@ -310,38 +313,38 @@ let concat = luaeval('"Lua".." is ".."awesome"')
 echo concat
 " 'Lua is awesome'
 
-" List-like tables are converted to Vim lists
+" Таблицы в виде списков преобразуются в списки Vim.
 let list = luaeval('{1, 2, 3, 4}')
 echo list[0]
 " 1
 echo list[1]
 " 2
-" Note that unlike Lua tables, Vim lists are 0-indexed
+" Обратите внимание, что в отличие от таблиц Lua, списки Vim индексируются с нуля 
 
-" Dict-like tables are converted to Vim dictionaries
+" Таблицы в виде словарей конвертируются в словари Vim.
 let dict = luaeval('{foo = "bar", baz = "qux"}')
 echo dict.foo
 " 'bar'
 
-" Same thing for booleans and nil
+" То же самое для логических значений и значений nil
 echo luaeval('true')
 " v:true
 echo luaeval('nil')
 " v:null
 
-" You can create Vimscript aliases for Lua functions
+" Вы можете создавать алиас в Vimscript для функций Lua.
 let LuaMathPow = luaeval('math.pow')
 echo LuaMathPow(2, 2)
 " 4
 let LuaModuleFunction = luaeval('require("mymodule").myfunction')
 call LuaModuleFunction()
 
-" It is also possible to pass Lua functions as values to Vim functions
+" Также можно передавать функции Lua в качестве значений функциям Vim.
 lua X = function(k, v) return string.format("%s:%s", k, v) end
 echo map([1, 2, 3], luaeval("X"))
 ```
 
-`luaeval()` takes an optional second argument that allows you to pass data to the expression. You can then access that data from Lua using the magic global `_A`:
+`luaeval()` принимает необязательный второй аргумент, который позволяет передавать данные в выражение. Затем вы можете получить доступ к этим данным из Lua, используя волшебную глобальную переменную `_A`:
 
 ```vim
 echo luaeval('_A[1] + _A[2]', [1, 1])
@@ -351,12 +354,12 @@ echo luaeval('string.format("Lua is %s", _A)', 'awesome')
 " 'Lua is awesome'
 ```
 
-See also:
+Также смотрите:
 - `:help luaeval()`
 
 ### v:lua
 
-This global Vim variable allows you to call global Lua functions directly from Vimscript. Again, Vim data types are converted to Lua types and vice versa.
+Эта глобальная переменная Vim позволяет вам вызывать глобальные функции Lua прямо из Vimscript. Опять же, типы данных Vim преобразуются в типы Lua и наоборот.
 
 ```vim
 call v:lua.print('Hello from Lua!')
@@ -366,10 +369,10 @@ let scream = v:lua.string.rep('A', 10)
 echo scream
 " 'AAAAAAAAAA'
 
-" Requiring modules works
+" Загрузка модулей работает
 call v:lua.require('mymodule').myfunction()
 
-" How about a nice statusline?
+" Как насчет неплохой статусной строки?
 lua << EOF
 function _G.statusline()
     local filepath = '%f'
@@ -386,7 +389,7 @@ EOF
 
 set statusline=%!v:lua.statusline()
 
-" Also works in expression mappings
+" Также работает в сопоставлениях выражений
 lua << EOF
 function _G.check_back_space()
     local col = vim.fn.col('.') - 1
@@ -404,47 +407,47 @@ inoremap <silent> <expr> <Tab>
     \ completion#trigger_completion()
 ```
 
-See also:
+Также смотрите:
 - `:help v:lua`
 - `:help v:lua-call`
 
-#### Caveats
+#### Предостережения
 
-This variable can only be used to call functions. The following will always throw an error:
+Эта переменная может использоваться только для вызова функций. Следующий код всегда будет вызывать ошибку:
 
 ```vim
-" Aliasing functions doesn't work
+" Создание алиасов не работает
 let LuaPrint = v:lua.print
 
-" Accessing dictionaries doesn't work
+" Доступ к словарям не работает
 echo v:lua.some_global_dict['key']
 
-" Using a function as a value doesn't work
+" Использование функции в качестве значения не работает
 echo map([1, 2, 3], v:lua.global_callback)
 ```
 
-### Tips
+### Советы
 
-You can get Lua syntax highlighting inside .vim files by putting `let g:vimsyn_embed = 'l'` in your configuration file. See `:help g:vimsyn_embed` for more on this option.
+Вы можете получить подсветку синтаксиса Lua внутри файлов .vim, поместив let `g: vimsyn_embed = 'l'` в свой файл конфигурации. См. `:help g:vimsyn_embed` для получения дополнительной информации об этой опции.
 
-## The vim namespace
+## Пространство имёен vim
 
-Neovim exposes a global `vim` variable which serves as an entry point to interact with its APIs from Lua. It provides users with an extended "standard library" of functions as well as various sub-modules.
+Neovim предоставляет глобальную переменную `vim`, которая служит точкой входа для взаимодействия с её API из Lua. Она предоставляет пользователям расширенную "стандартную библиотеку" функций, а также различные подмодули.
 
-Some notable functions and modules include:
+Некоторые примечательные функции и модули включают:
 
-- `vim.inspect`: pretty-print Lua objects (useful for inspecting tables)
-- `vim.regex`: use Vim regexes from Lua
-- `vim.api`: module that exposes API functions (the same API used by remote plugins)
-- `vim.loop`: module that exposes the functionality of Neovim's event-loop (using LibUV)
-- `vim.lsp`: module that controls the built-in LSP client
-- `vim.treesitter`: module that exposes the functionality of the tree-sitter library
+- `vim.inspect`: вывод Lua объектов (полезно для проверки таблиц)
+- `vim.regex`: использование регулярных выражений Vim из Lua
+- `vim.api`: модуль, который предоставляет функции API (тот же API, что используют удалённые(remote) плагины)
+- `vim.loop`: модуль, который предоставляет функционал цикла событий Neovim (с использованием LibUV)
+- `vim.lsp`: модуль, который управляет встроенным клиентом LSP
+- `vim.treesitter`: модуль, который предоставляет функционал библиотеки tree-sitter
 
-This list is by no means comprehensive. If you wish to know more about what's made available by the `vim` variable, `:help lua-stdlib` and `:help lua-vim` are the way to go. Alternatively, you can do `:lua print(vim.inspect(vim))` to get a list of every module.
+Этот список ни в коем случае не является исчерпывающим. Если вы хотите узнать больше о том, что делает переменная `vim`, `:help lua-stdlib` и `:help lua-vim` вам в помощь :). В качестве альтернативы вы можете выполнить `:lua print (vim.inspect (vim))`, чтобы получить список всех модулей.
 
-#### Tips
+#### Советы
 
-Writing `print(vim.inspect(x))` every time you want to inspect the contents of an object can get pretty tedious. It might be worthwhile to have a global wrapper function somewhere in your configuration:
+Писать `print(vim.inspect(x))` каждый раз, когда вы хотите проверить содержимое объекта, может оказаться довольно утомительным. Возможно, стоит иметь где-нибудь в вашей конфигурации глобальную функцию-оболочку:
 
 ```lua
 function _G.dump(...)
@@ -453,7 +456,7 @@ function _G.dump(...)
 end
 ```
 
-You can then inspect the contents of an object very quickly in your code or from the command-line:
+Затем вы можете очень быстро проверить содержимое объекта в своем коде или из командной строки:
 
 ```lua
 dump({1, 2, 3})
@@ -464,18 +467,18 @@ dump({1, 2, 3})
 ```
 
 
-Additionally, you may find that built-in Lua functions are sometimes lacking compared to what you would find in other languages (for example `os.clock()` only returns a value in seconds, not milliseconds). Be sure to look at the Neovim stdlib (and `vim.fn`, more on that later), it probably has what you're looking for.
+Кроме того, вы можете обнаружить, что встроенных функций Lua иногда не хватает по сравнению с тем, что вы найдете в других языках (например, `os.clock()` возвращает значение только в секундах, а не в миллисекундах). Обязательно посмотрите Neovim stdlib (и `vim.fn`, подробнее об этом позже), вероятно, в нем есть то, что вы ищете.
 
-## Using Vimscript from Lua
+## Использование Vimscript из Lua
 
 ### vim.api.nvim_eval()
 
-This function evaluates a Vimscript expression string and returns its value. Vimscript data types are automatically converted to Lua types (and vice versa).
+Эта функция оценивает строку выражения Vimscript и возвращает ее значение. Типы данных Vimscript автоматически преобразуются в типы Lua (и наоборот).
 
-It is the Lua equivalent of the `luaeval()` function in Vimscript
+Это Lua-эквивалент функции `luaeval()` в Vimscript.
 
 ```lua
--- Data types are converted correctly
+-- Типы данных конвертируются правильно
 print(vim.api.nvim_eval('1 + 1')) -- 2
 print(vim.inspect(vim.api.nvim_eval('[1, 2, 3]'))) -- { 1, 2, 3 }
 print(vim.inspect(vim.api.nvim_eval('{"foo": "bar", "baz": "qux"}'))) -- { baz = "qux", foo = "bar" }
@@ -483,15 +486,15 @@ print(vim.api.nvim_eval('v:true')) -- true
 print(vim.api.nvim_eval('v:null')) -- nil
 ```
 
-**TODO**: is it possible for `vim.api.nvim_eval()` to return a `funcref`?
+**TODO**: возможно ли, чтобы `vim.api.nvim_eval()` возвращала `funcref`?
 
-#### Caveats
+#### Предосторожности
 
-Unlike `luaeval()`, `vim.api.nvim_eval()` does not provide an implicit `_A` variable to pass data to the expression.
+В отличие от `luaeval()`, `vim.api.nvim_eval()` не предоставляет неявную переменную `_A` для передачи данных в выражение.
 
 ### vim.api.nvim_exec()
 
-This function evaluates a chunk of Vimscript code. It takes in a string containing the source code to execute and a boolean to determine whether the output of the code should be returned by the function (you can then store the output in a variable, for example).
+Эта функция оценивает фрагмент кода Vimscript. Она принимает строку, содержащую исходный код для выполнения, и логическое значение, чтобы определить, должен ли вывод кода возвращаться функцией (вы можете сохранить вывод в переменной, для примера).
 
 ```lua
 local result = vim.api.nvim_exec(
@@ -509,11 +512,11 @@ true)
 print(result) -- 'hello world'
 ```
 
-**TODO**: The docs say that script-scope (`s:`) is supported, but running this snippet with a script-scoped variable throws an error. Why?
+**TODO**: в документации указано, что  скриптовая область действия(`s:`) поддерживается, но запуск этого фрагмента с переменной скриптовой области действия  вызывает ошибку. Почему?
 
 ### vim.api.nvim_command()
 
-This function executes an ex command. It takes in a string containing the command to execute.
+Эта функция выполняет команду ex. Она принимает строку, содержащую команду для выполнения.
 
 ```lua
 vim.api.nvim_command('new')
@@ -522,59 +525,59 @@ vim.api.nvim_command('set nonumber')
 vim.api.nvim_command('%s/foo/bar/g')
 ```
 
-Note: `vim.cmd` is a shorter alias for this function
+Примечание: `vim.cmd` - более короткий alias для этой функции.
 
 ```lua
 vim.cmd('buffers')
 ```
 
-#### Tips
+#### Советы
 
-Since you have to pass strings to these functions, you often end up having to escape backslashes:
+Поскольку вам нужно передавать строки этим функциям, вам часто приходится экранировать обратный слэш:
 
 ```lua
 vim.cmd('%s/\\Vfoo/bar/g')
 ```
 
-Literal strings are easier to use as they do not require escaping characters:
+Строковые литералы проще использовать, поскольку они не требуют экранирующих символов:
 
 ```lua
 vim.cmd([[%s/\Vfoo/bar/g]])
 ```
 
-## Managing vim options
+## Управление опции vim
 
-### Using api functions
+### Использование функций API
 
-Neovim provides a set of API functions to either set an option or get its current value:
+Neovim предоставляет набор функций API для изменения опции или получения её текущего значения:
 
-- Global options:
+- Глобальные опции:
     - `vim.api.nvim_set_option()`
     - `vim.api.nvim_get_option()`
-- Buffer-local options:
+- Локальные опции буферов:
     - `vim.api.nvim_buf_set_option()`
     - `vim.api.nvim_buf_get_option()`
-- Window-local options:
+- Локальные опции окон:
     - `vim.api.nvim_win_set_option()`
     - `vim.api.nvim_win_get_option()`
 
-They take a string containing the name of the option to set/get as well as the value you want to set it to.
+Они принимают строку, содержащую имя опции, которую нужно установить / получить, а также значение, которое вы хотите установить.
 
-Boolean options (like `(no)number`) have to be set to either `true` or `false`:
+Логические параметры (например, `(no)number`) должны иметь значение `true` или `false`:
 
 ```lua
 vim.api.nvim_set_option('smarttab', false)
 print(vim.api.nvim_get_option('smarttab')) -- false
 ```
 
-Unsurprisingly, string options have to be set to a string:
+Неудивительно, что параметры строки должны быть строками:
 
 ```lua
 vim.api.nvim_set_option('selection', 'exclusive')
 print(vim.api.nvim_get_option('selection')) -- 'exclusive'
 ```
 
-Number options accept a number:
+Числовые опции принимают число:
 
 ```lua
 vim.api.nvim_set_option('updatetime', 3000)
@@ -582,6 +585,7 @@ print(vim.api.nvim_get_option('updatetime')) -- 3000
 ```
 
 Buffer-local and window-local options also need a buffer number or a window number (using `0` will set/get the option for the current buffer/window):
+Локальные опции буффера и окна также нуждаются в номере буфера или номере окна (использование `0` установит/получит опцию для текущего буфера/окна)
 
 ```lua
 vim.api.nvim_win_set_option(0, 'number', true)
@@ -590,13 +594,13 @@ print(vim.api.nvim_win_get_option(0, 'number')) -- true
 print(vim.api.nvim_buf_get_option(10, 'shiftwidth')) -- 4
 ```
 
-### Using meta-accessors
+### Использование мета-аксессоров
 
-A few meta-accessors are available if you want to set options in a more "idiomatic" way. They essentially wrap the above API functions and allow you to manipulate options as if they were variables:
+Если вы хотите установить параметры более "идиоматическим" способом, доступны несколько мета-аксессуаров. По сути, они обертывают вышеуказанные функции API и позволяют управлять параметрами, как если бы они были переменными:
 
-- `vim.o.{option}`: global options
-- `vim.bo.{option}`: buffer-local options
-- `vim.wo.{option}`: window-local options
+- `vim.o.{option}`: глобальные опции
+- `vim.bo.{option}`: локальные опции буффера
+- `vim.wo.{option}`: локальные опции окна
 
 ```lua
 vim.o.smarttab = false
@@ -606,55 +610,55 @@ vim.bo.shiftwidth = 4
 print(vim.bo.shiftwidth) -- 4
 ```
 
-You can specify a number for buffer-local and window-local options. If no number is given, the current buffer/window is used:
+Вы можете указать номер для опций, локальных для буфера и для локального окна. Если номер не указан, используется текущий буфер / окно:
 
 ```lua
-vim.bo[4].expandtab = true -- same as vim.api.nvim_buf_set_option(4, 'expandtab', true)
-vim.wo.number = true -- same as vim.api.nvim_win_set_option(0, 'number', true)
+vim.bo[4].expandtab = true -- тоже самое что и vim.api.nvim_buf_set_option(4, 'expandtab', true)
+vim.wo.number = true -- тоже самое что и vim.api.nvim_win_set_option(0, 'number', true)
 ```
 
-See also:
+Смотрите также:
 - `:help lua-vim-internal-options`
 
-#### Caveats
+#### Предосторожности
 
-There is no equivalent to the `:set` command in Lua, you either set an option globally or locally.
+В Lua нет эквивалента команде `:set`, вы либо устанавливаете параметр глобально, либо локально.
 
-See also:
+Смотрите также:
 - `:help :setglobal`
 - `:help global-local`
 
-## Managing vim internal variables
+## Управление внутренними переменными vim
 
-### Using api functions
+### Использование функций API
 
-Much like options, internal variables have their own set of API functions:
+Как и у параметров, внутренние переменные имеют собственный набор функций API:
 
-- Global variables (`g:`):
-    - `vim.api.nvim_set_var()`
-    - `vim.api.nvim_get_var()`
-    - `vim.api.nvim_del_var()`
-- Buffer variables (`b:`):
-    - `vim.api.nvim_buf_set_var()`
-    - `vim.api.nvim_buf_get_var()`
-    - `vim.api.nvim_buf_del_var()`
-- Window variables (`w:`):
-    - `vim.api.nvim_win_set_var()`
-    - `vim.api.nvim_win_get_var()`
-    - `vim.api.nvim_win_del_var()`
-- Tabpage variables (`t:`):
-    - `vim.api.nvim_tabpage_set_var()`
-    - `vim.api.nvim_tabpage_get_var()`
-    - `vim.api.nvim_tabpage_del_var()`
-- Predefined Vim variables (`v:`):
-    - `vim.api.nvim_set_vvar()`
-    - `vim.api.nvim_get_vvar()`
+- Глобальные переменные (`g:`):
+     - `vim.api.nvim_set_var ()`
+     - `vim.api.nvim_get_var ()`
+     - `vim.api.nvim_del_var ()`
+- Переменные буфера (`b:`):
+     - `vim.api.nvim_buf_set_var ()`
+     - `vim.api.nvim_buf_get_var ()`
+     - `vim.api.nvim_buf_del_var ()`
+- Оконные переменные (`w:`):
+     - `vim.api.nvim_win_set_var ()`
+     - `vim.api.nvim_win_get_var ()`
+     - `vim.api.nvim_win_del_var ()`
+- Переменные вкладки (`t:`):
+     - `vim.api.nvim_tabpage_set_var ()`
+     - `vim.api.nvim_tabpage_get_var ()`
+     - `vim.api.nvim_tabpage_del_var ()`
+- Предопределенные переменные Vim (`v:`):
+     - `vim.api.nvim_set_vvar ()`
+     - `vim.api.nvim_get_vvar ()`
 
-With the exception of predefined Vim variables, they can also be deleted (the `:unlet` command is the equivalent in Vimscript). Local variables (`l:`), script variables (`s:`) and function arguments (`a:`) cannot be manipulated as they only make sense in the context of a Vim script, Lua has its own scoping rules.
+За исключением предопределенных переменных Vim, они также могут быть удалены (команда `:unlet` является эквивалентом в Vimscript). Локальные переменные (`l:`), скриптовые переменные (`s:`) и аргументы функции (`a:`) не могут быть изменены, поскольку они имеют смысл только в контексте Vimscript, Lua имеет свои собственные правила области видимости
 
-If you are unfamiliar with what these variables do, `:help internal-variables` describes them in detail.
+Если вы не знакомы с тем, что делают эти переменные, `:help internal-variables` описывает их подробно.
 
-These functions take a string containing the name of the variable to set/get/delete as well as the value you want to set it to.
+Эти функции принимают строку, содержащую имя переменной для изменения/получения/удаления, а также значение, которое вы хотите установить.
 
 ```lua
 vim.api.nvim_set_var('some_global_variable', { key1 = 'value', key2 = 300 })
@@ -662,7 +666,7 @@ print(vim.inspect(vim.api.nvim_get_var('some_global_variable'))) -- { key1 = "va
 vim.api.nvim_del_var('some_global_variable')
 ```
 
-Variables that are scoped to a buffer, a window or a tabpage also receive a number (using `0` will set/get/delete the variable for the current buffer/window/tabpage):
+Переменные, которые ограничены буфером, окном или вкладкой, также получают номер (использование `0` изменит/получит/удалит переменную для текущего буфера/окна/вкладки):
 
 ```lua
 vim.api.nvim_win_set_var(0, 'some_window_variable', 2500)
@@ -673,15 +677,15 @@ vim.api.nvim_win_del_var(0, 'some_window_variable')
 vim.api.nvim_buf_del_var(3, 'some_tabpage_variable')
 ```
 
-### Using meta-accessors
+### Использование мета-аксессоров
 
-Internal variables can be manipulated more intuitively using these meta-accessors:
+Внутренними переменными можно управлять более интуитивно с помощью этих мета-аксессоров:
 
-- `vim.g.{name}`: global variables
-- `vim.b.{name}`: buffer variables
-- `vim.w.{name}`: window variables
-- `vim.t.{name}`: tabpage variables
-- `vim.v.{name}`: predefined Vim variables
+- `vim.g.{name}`: глобальные переменные
+- `vim.b.{name}`: буферные переменные
+- `vim.w.{name}`: переменные окна
+- `vim.t.{name}`: переменные вкладки
+- `vim.v.{name}`: предопределенные переменные Vim
 
 ```lua
 vim.g.some_global_variable = {
@@ -692,17 +696,17 @@ vim.g.some_global_variable = {
 print(vim.inspect(vim.g.some_global_variable)) -- { key1 = "value", key2 = 300 }
 ```
 
-To delete one of these variables, simply assign `nil` to it:
+Чтобы удалить одну из этих переменных, просто присвойте ей `nil`:
 
 ```lua
 vim.g.some_global_variable = nil
 ```
 
-#### Caveats
+#### Предостережения
 
-Unlike options meta-accessors, you cannot specify a number for buffer/window/tabpage-scoped variables.
+В отличие от мета-аксессоров опций, вы не можете указать число для переменных с областью буфера/окна/вкладки.
 
-Additionally, you cannot add/update/delete keys from a dictionary stored in one of these variables. For example, this snippet of Vimscript code does not work as expected:
+Кроме того, вы не можете добавлять/обновлять/удалять ключи из словаря, хранящегося в одной из этих переменных. Например, этот фрагмент кода Vimscript не работает:
 
 ```vim
 let g:variable = {}
@@ -711,17 +715,17 @@ echo g:variable
 " {}
 ```
 
-This is a known issue:
+Это известная проблема:
 
 - [Issue #12544](https://github.com/neovim/neovim/issues/12544)
 
-## Calling Vimscript functions
+## Вызов функций Vimscript
 
 ### vim.call()
 
-`vim.call()` calls a Vimscript function. This can either be a built-in Vim function or a user function. Again, data types are converted back and forth from Lua to Vimscript.
+`vim.call()` вызывает функцию Vimscript. Это может быть встроенная функция Vim или пользовательская функция. Опять же, типы данных конвертируются из Lua в Vimscript и обратно.
 
-It takes in the name of the function followed by the arguments you want to pass to that function:
+Она принимает имя функции, за которым следуют аргументы, которые вы хотите передать этой функции:
 
 ```lua
 print(vim.call('printf', 'Hello from %s', 'Lua'))
@@ -758,22 +762,22 @@ end
 vim.fn.jobstart('ls', { on_stdout = print_stdout })
 ```
 
-Hashes `#` aren't valid characters for indentifiers in Lua, so autoload functions have to be called with this syntax:
+Хэши `#` не являются допустимыми символами для идентификаторов в Lua, поэтому функции автозагрузки должны вызываться с таким синтаксисом:
 
 ```lua
 vim.fn['my#autoload#function']()
 ```
 
-See also:
+Также смотрите:
 - `:help vim.fn`
 
-#### Tips
+#### Советы
 
-Neovim has an extensive library of powerful built-in functions that are very useful for plugins. See `:help vim-function` for an alphabetical list and `:help function-list` for a list of functions grouped by topic.
+Neovim имеет обширную библиотеку мощных встроенных функций, которые очень полезны для плагинов. Смотрите `:help vim-function` для списка в алфавитном порядке и `:help function-list` для списка функций, сгруппированных по темам.
 
-#### Caveats
+#### Предостережения
 
-Some Vim functions that should return a boolean return `1` or `0` instead. This isn't a problem in Vimscript as `1` is truthy and `0` falsy, enabling constructs like these:
+Некоторые функции Vim, которые должны возвращать логическое значение `1` или `0`. В Vimscript это не проблема, поскольку `1` истинно, а `0` ложно, что позволяет использовать такие конструкции:
 
 ```vim
 if has('nvim')
@@ -781,7 +785,7 @@ if has('nvim')
 endif
 ```
 
-In Lua however, only `false` and `nil` are considered falsy, numbers always evaluate to `true` no matter their value. You have to explicitly check for `1` or `0`:
+Однако в Lua ложными считаются только false и nil, числа всегда оцениваются как true, независимо от их значения. Вы должны явно проверить `1` или `0`:
 
 ```lua
 if vim.fn.has('nvim') == 1 then
@@ -789,44 +793,44 @@ if vim.fn.has('nvim') == 1 then
 end
 ```
 
-## Defining mappings
+## Определение сопоставление клавиш
 
-Neovim provides a list of API functions to set, get and delete mappings:
+Neovim предоставляет список функций API для установки, получения и удаления сопоставлений:
 
-- Global mappings:
+- Для глобальных сопоставлений:
     - `vim.api.nvim_set_keymap()`
     - `vim.api.nvim_get_keymap()`
     - `vim.api.nvim_del_keymap()`
-- Buffer-local mappings:
+- Для локальных сопоставлений:
     - `vim.api.nvim_buf_set_keymap()`
     - `vim.api.nvim_buf_get_keymap()`
     - `vim.api.nvim_buf_del_keymap()`
 
-Let's start with `vim.api.nvim_set_keymap()` and `vim.api.nvim_buf_set_keymap()`
+Начнем с `vim.api.nvim_set_keymap()` и `vim.api.nvim_buf_set_keymap()`
 
-The first argument passed to the function is a string containing the name of the mode for which the mapping will take effect:
+Первым аргументом, переданным в функцию, является строка, содержащая имя режима, для которого сопоставление будет действовать:
 
-| String value           | Help page     | Affected modes                           | Vimscript equivalent |
-| ---------------------- | ------------- | ---------------------------------------- | -------------------- |
-| `''` (an empty string) | `mapmode-nvo` | Normal, Visual, Select, Operator-pending | `:map`               |
-| `'n'`                  | `mapmode-n`   | Normal                                   | `:nmap`              |
-| `'v'`                  | `mapmode-v`   | Visual and Select                        | `:vmap`              |
-| `'s'`                  | `mapmode-s`   | Select                                   | `:smap`              |
-| `'x'`                  | `mapmode-x`   | Visual                                   | `:xmap`              |
-| `'o'`                  | `mapmode-o`   | Operator-pending                         | `:omap`              |
-| `'!'`                  | `mapmode-ic`  | Insert and Command-line                  | `:map!`              |
-| `'i'`                  | `mapmode-i`   | Insert                                   | `:imap`              |
-| `'l'`                  | `mapmode-l`   | Insert, Command-line, Lang-Arg           | `:lmap`              |
-| `'c'`                  | `mapmode-c`   | Command-line                             | `:cmap`              |
-| `'t'`                  | `mapmode-t`   | Terminal                                 | `:tmap`              |
+| Строчное значение      | Страница помощи | Затронутые режимы                        | Эквивалент Vimscript |
+| ---------------------- | -------------   | ---------------------------------------- | -------------------- |
+| `''` (пустая строка)   | `mapmode-nvo`   | Normal, Visual, Select, Operator-pending | `:map`               |
+| `'n'`                  | `mapmode-n`     | Normal                                   | `:nmap`              |
+| `'v'`                  | `mapmode-v`     | Visual and Select                        | `:vmap`              |
+| `'s'`                  | `mapmode-s`     | Select                                   | `:smap`              |
+| `'x'`                  | `mapmode-x`     | Visual                                   | `:xmap`              |
+| `'o'`                  | `mapmode-o`     | Operator-pending                         | `:omap`              |
+| `'!'`                  | `mapmode-ic`    | Insert and Command-line                  | `:map!`              |
+| `'i'`                  | `mapmode-i`     | Insert                                   | `:imap`              |
+| `'l'`                  | `mapmode-l`     | Insert, Command-line, Lang-Arg           | `:lmap`              |
+| `'c'`                  | `mapmode-c`     | Command-line                             | `:cmap`              |
+| `'t'`                  | `mapmode-t`     | Terminal                                 | `:tmap`              |
 
-The second argument is a string containing the left-hand side of the mapping (the key or set of keys that trigger the command defined in the mapping). An empty string is equivalent to `<Nop>`, which disables a key.
+Второй аргумент - это строка, содержащая левую часть отображения (ключ или набор ключей, запускающих команду, определенную в сопоставлении). Пустая строка эквивалентна `<Nop>`, который отключает ключ.
 
-The third argument is a string containing the right-hand side of the mapping (the command to execute).
+Третий аргумент - это строка, содержащая правую часть сопоставления (команду для выполнения).
 
-The final argument is a table containing boolean options for the mapping as defined in `:help :map-arguments` (including `noremap` and excluding `buffer`).
+Последний аргумент - это таблица, содержащая логические параметры для сопоставления, как определено в `:help :map-arguments` (включая `noremap` и исключая `buffer`).
 
-Buffer-local mappings also take a buffer number as their first argument (`0` sets the mapping for the current buffer).
+Сопоставления локальных буферов также принимают номер буфера в качестве первого аргумента (`0` устанавливает сопоставление для текущего буфера).
 
 ```lua
 vim.api.nvim_set_keymap('n', '<leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
@@ -836,67 +840,67 @@ vim.api.nvim_buf_set_keymap(0, '', 'cc', 'line(".") == 1 ? "cc" : "ggcc"', { nor
 -- :noremap <buffer> <expr> cc line('.') == 1 ? 'cc' : 'ggcc'
 ```
 
-`vim.api.nvim_get_keymap()` takes a string containing the shortname of the mode for which you want the list of mappings (see table above). The return value is a table containing all global mappings for the mode.
+`vim.api.nvim_get_keymap()` принимает строку, содержащую краткое имя режима, для которого вы хотите получить список сопоставлений (см. таблицу выше). Возвращаемое значение - это таблица, содержащая все глобальные сопоставления для режима.
 
 ```lua
 print(vim.inspect(vim.api.nvim_get_keymap('n')))
 -- :verbose nmap
 ```
 
-`vim.api.nvim_buf_get_keymap()` takes an additional buffer number as its first argument (`0` will get mapppings for the current bufffer)
+`vim.api.nvim_buf_get_keymap ()` принимает дополнительный номер буфера в качестве своего первого аргумента (`0` получит сопоставления для текущего буфера)
 
 ```lua
 print(vim.inspect(vim.api.nvim_buf_get_keymap(0, 'i')))
 -- :verbose imap <buffer>
 ```
 
-`vim.api.nvim_del_keymap()` takes a mode and the left-hand side of a mapping.
+`vim.api.nvim_del_keymap()` принимает режим и левую часть сопоставления.
 
 ```lua
 vim.api.nvim_del_keymap('n', '<leader><Space>')
 -- :nunmap <leader><Space>
 ```
 
-Again, `vim.api.nvim_buf_del_keymap()`, takes a buffer number as its first argument, with `0` representing the current buffer.
+Опять же, `vim.api.nvim_buf_del_keymap ()` принимает номер буфера в качестве своего первого аргумента, где `0` представляет текущий буфер.
 
 ```lua
 vim.api.nvim_buf_del_keymap(0, 'i', '<Tab>')
 -- :iunmap <buffer> <Tab>
 ```
 
-## Defining user commands
+## Определение пользовательских команд
 
-There is currently no interface to create user commands in Lua. It is planned, though:
+В настоящее время в Lua нет интерфейса для создания пользовательских команд. Тем не менее, планы имеются:
 
 - [Pull request #11613](https://github.com/neovim/neovim/pull/11613)
 
-For the time being, you're probably better off creating commands in Vimscript.
+В настоящее время вам, вероятно, лучше создавать команды в Vimscript.
 
-## Defining autocommands
+## Определение автокоманд
 
-Augroups and autocommands do not have an interface yet but it is being worked on:
+Augroup-ы и autcommand-ы еще не имеют интерфейса, но над ним работают:
 
 - [Pull request #12378](https://github.com/neovim/neovim/pull/12378)
 
-In the meantime, you can either create autocommands in Vimscript or use [this wrapper from norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
+А пока вы можете создавать автокоманды в Vimscript или использовать [эту оболочку из norcalli/nvim_utils](https://github.com/norcalli/nvim_utils/blob/master/lua/nvim_utils.lua#L554-L567)
 
-## Defining syntax/highlights
+## Определение синтаксиса/подсветки
 
-The syntax API is still a work in progress. Here are a couple of pointers:
+Синтаксический API все еще находится в стадии разработки. Вот пара указателей:
 
 - [Issue #9876](https://github.com/neovim/neovim/issues/9876)
-- [tjdevries/colorbuddy.vim, a library for creating colorschemes in Lua](https://github.com/tjdevries/colorbuddy.vim)
+- [tjdevries/colorbuddy.vim, библиотека для создания цветовых схем в Lua](https://github.com/tjdevries/colorbuddy.vim)
 - `:help lua-treesitter`
 
-## General tips and recommendations
+## Общие советы и рекомендации
 
-### Setting up linters/language servers
+### Настройка линтеров / языковых серверов
 
-If you're using linters and/or language servers to get diagnostics and autocompletion for Lua projects, you may have to configure Neovim-specific settings for them. Here are a few recommended settings for popular tools:
+Если вы используете линтеры и/или языковые серверы для диагностики и автозаполнения для проектов Lua, возможно, вам придется настроить для них параметры, специфичные для Neovim. Вот несколько рекомендуемых настроек для популярных инструментов:
 
 #### luacheck
 
-You can get [luacheck](https://github.com/mpeterv/luacheck/) to recognize the `vim` global by putting this configuration in `~/.luacheckrc` (or `$XDG_CONFIG_HOME/luacheck/.luacheckrc`):
+Вы можете заставить [luacheck](https://github.com/mpeterv/luacheck/) распознать глобал `vim`, поместив эту конфигурацию в `~/.luacheckrc` (или `$XDG_CONFIG_HOME/luacheck/.luacheckrc`):
 
 ```lua
 globals = {
@@ -904,30 +908,30 @@ globals = {
 }
 ```
 
-The [Alloyed/lua-lsp](https://github.com/Alloyed/lua-lsp/) language server uses `luacheck` to provide linting and reads the same file.
+Языковой сервер [Alloyed/lua-lsp](https://github.com/Alloyed/lua-lsp/) использует luacheck для обеспечения линтинга и читает тот же файл.
 
-For more information on how to configure `luacheck`, please refer to its [documentation](https://luacheck.readthedocs.io/en/stable/config.html)
+Для получения дополнительной информации о том, как настроить `luacheck`, обратитесь к его [документации] (https://luacheck.readthedocs.io/en/stable/config.html)
 
 #### sumneko/lua-language-server
 
-Example configuration for [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) (the example uses the built-in LSP client but the configuration should be identical for other LSP client implementations):
+Пример конфигурации для [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) (в примере используется встроенный клиент LSP, но конфигурация для другого клиента LSP должна быть идентична):
 
 ```lua
 require'lspconfig'.sumneko_lua.setup {
     settings = {
         Lua = {
             runtime = {
-                -- Get the language server to recognize LuaJIT globals like `jit` and `bit`
+                -- Заставьте языковой сервер распознавать глобальные переменные LuaJIT, такие как `jit` и` bit`
                 version = 'LuaJIT',
-                -- Setup your lua path
+                - Настройте путь к lua
                 path = vim.split(package.path, ';'),
             },
             diagnostics = {
-                -- Get the language server to recognize the `vim` global
+                - Заставьте языковой сервер распознавать глобальную переменную `vim`
                 globals = {'vim'},
             },
             workspace = {
-                -- Make the server aware of Neovim runtime files
+                -- Сделать так, чтобы сервер знал о рантайм файлах Neovim
                 library = {
                     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
                     [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
@@ -938,24 +942,25 @@ require'lspconfig'.sumneko_lua.setup {
 }
 ```
 
-For more information on how to configure [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) see ["Setting without VSCode"](https://github.com/sumneko/lua-language-server/wiki/Setting-without-VSCode)
+Для получения дополнительной информации о настройке [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server/) см. ["Setting without VSCode"](https://github.com/sumneko/lua-language-server/wiki/Setting-without-VSCode)
 
 #### coc.nvim
 
-The [rafcamlet/coc-nvim-lua](https://github.com/rafcamlet/coc-nvim-lua/) completion source for [coc.nvim](https://github.com/neoclide/coc.nvim/) provides completion items for the Neovim stdlib.
+Источник автодополнения [rafcamlet/coc-nvim-lua](https://github.com/rafcamlet/coc-nvim-lua/) для [coc.nvim](https://github.com/neoclide/coc.nvim/) предоставляет элементы автодополнения для библиотеки Neovim stdlib.
 
 **TODO**:
-- Hot-reloading of modules
-- `vim.validate()`?
-- Add stuff about unit tests? I know Neovim uses the [busted](https://olivinelabs.com/busted/) framework, but I don't know how to use it for plugins
-- Best practices? I'm not a Lua wizard so I wouldn't know
-- How to use LuaRocks packages ([wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)?)
 
-## Miscellaneous
+- Горячая перезагрузка модулей
+- `vim.validate()`?
+- Добавить материал о модульных тестах? Я знаю, что Neovim использует фреймворк [busted](https://olivinelabs.com/busted/), но я не знаю, как использовать его для плагинов.
+- Лучшие практики? Я не Lua мастер, поэтому не знаю
+- Как использовать пакеты LuaRocks ([wbthomason / packer.nvim](https://github.com/wbthomason/packer.nvim)?)
+
+## Разное
 
 ### vim.loop
 
-`vim.loop` is the module that exposes the LibUV API. Some resources:
+`vim.loop`- это модуль, который предоставляет API LibUV . Некоторые ресурсы:
 
 - [Official documentation for LibUV](https://docs.libuv.org/en/v1.x/)
 - [Luv documentation](https://github.com/luvit/luv/blob/master/docs.md)
@@ -966,9 +971,9 @@ See also:
 
 ### vim.lsp
 
-`vim.lsp` is the module that controls the built-in LSP client. The [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) repository contains default configurations for popular language servers.
+`vim.lsp` - это модуль, который управляет встроенным клиентом LSP. Репозиторий [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) содержит конфигурации по умолчанию для популярных языковых серверов.
 
-The behavior of the client can be configured using "lsp-handlers". For more information:
+Поведение клиента можно настроить с помощью обработчиков "lsp-handlers". Для дополнительной информации:
 - `:help lsp-handler`
 - [neovim/neovim#12655](https://github.com/neovim/neovim/pull/12655)
 - [How to migrate from diagnostic-nvim](https://github.com/nvim-lua/diagnostic-nvim/issues/73#issue-737897078)
@@ -982,26 +987,24 @@ See also:
 
 ### vim.treesitter
 
-`vim.treesitter` is the module that controls the integration of the [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) library in Neovim. If you want to know more about Tree-sitter, you may be interested in this [presentation (38:37)](https://www.youtube.com/watch?v=Jes3bD6P0To).
+`vim.treesitter` - это модуль, который управляет интеграцией библиотеки [Tree-sitter] (https://tree-sitter.github.io/tree-sitter/) в Neovim. Если вы хотите узнать больше о Tree-sitter, вам может быть интересна эта [презентация (38:37)] (https://www.youtube.com/watch?v=Jes3bD6P0To).
 
-The [nvim-treesitter](https://github.com/nvim-treesitter/) organisation hosts various plugins taking advantage of the library.
+Организация [nvim-treeitter] (https://github.com/nvim-treesitter/) размещает различные плагины, использующие преимущества библиотеки.
 
 See also:
 - `:help lua-treesitter`
 
-### Transpilers
+### Транспайлеры
 
-One advantage of using Lua is that you don't actually have to write Lua code! There is a multitude of transpilers available for the language.
+Одним из преимуществ использования Lua является то, что вам фактически не нужно писать код Lua! Для этого языка доступно множество транспайлеров.
 
 - [Moonscript](https://moonscript.org/)
 
-Probably one of the most well-known transpilers for Lua. Adds a lots of convenient features like classes, list comprehensions or function literals. The [svermeulen/nvim-moonmaker](https://github.com/svermeulen/nvim-moonmaker) plugin allows you to write Neovim plugins and configuration directly in Moonscript.
+Вероятно, один из самых известных транспилеров для Lua. Добавляет множество удобных функций, таких как классы, списковое включение или функциональные литералы. Плагин [svermeulen/nvim-moonmaker] (https://github.com/svermeulen/nvim-moonmaker) позволяет писать плагины и настройку Neovim непосредственно в Moonscript.
 
 - [Fennel](https://fennel-lang.org/)
 
-A lisp that compiles to Lua. You can write configuration and plugins for Neovim in Fennel with the [Olical/aniseed](https://github.com/Olical/aniseed) plugin. Additionally, the [Olical/conjure](https://github.com/Olical/conjure) plugin provides an interactive development environment that supports Fennel (among other languages).
-
-Other interesting projects:
+Другие интересные проекты:
 - [TypeScriptToLua/TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
 - [teal-language/tl](https://github.com/teal-language/tl)
 - [Haxe](https://haxe.org/)
