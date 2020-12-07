@@ -1,57 +1,57 @@
-# Getting started using Lua in Neovim
+# Начало работы с Lua в Neovim
 
 ## Table of Contents
 
 * [Введение](#введение)
-  * [Изучение языка Lua](#изучение-luaaaaa)
-  * [Туториалы по использованию Lua в neovim](#туториалы-по-использованию-Lua-в-neovim)
-  * [Companion plugins](#companion-plugins)
-* [Where to put Lua files](#where-to-put-lua-files)
+  * [Изучение языка Lua](#изучение-lua)
+  * [Имеющиеся туториалы по написанию плагинов на Lua для Neovim](#имеющиеся-туториалы-по-написанию-плагинов-на-lua-для-neovim)
+  * [Связанные плагины](#связанные-плагины)
+* [Куда класть файлы Lua](#куда-класть-файлы-lua)
   * [init.lua](#initlua)
-  * [Other Lua files](#other-lua-files)
-    * [Caveats](#caveats)
-    * [Tips](#tips)
-    * [A note about packages](#a-note-about-packages)
-* [Using Lua from Vimscript](#using-lua-from-vimscript)
+  * [Другие файлы Lua](#другие-файлы-lua)
+    * [Предостережения](#предостережения)
+    * [Советы](#советы)
+    * [Заметка относительно пакетов](#заметка-относительно-пакетов)
+* [Использование Lua в Vimscript](#использование-lua-в-vimscript)
   * [:lua](#lua)
   * [:luado](#luado)
   * [:luafile](#luafile)
     * [luafile vs require():](#luafile-vs-require)
   * [luaeval()](#luaeval)
   * [v:lua](#vlua)
-    * [Caveats](#caveats-1)
-  * [Tips](#tips-1)
-* [The vim namespace](#the-vim-namespace)
-    * [Tips](#tips-2)
-* [Using Vimscript from Lua](#using-vimscript-from-lua)
+    * [Предостережения](#предостережения-1)
+  * [Советы](#советы-1)
+* [Пространство имён vim](#пространство-имён-vim)
+    * [Советы](#советы-2)
+* [Использование Vimscript из Lua](#Использование-Vimscript-из-Lua)
   * [vim.api.nvim_eval()](#vimapinvim_eval)
-    * [Caveats](#caveats-2)
+    * [Предостережения](#предостережения-2)
   * [vim.api.nvim_exec()](#vimapinvim_exec)
   * [vim.api.nvim_command()](#vimapinvim_command)
-    * [Tips](#tips-3)
-* [Managing vim options](#managing-vim-options)
-  * [Using api functions](#using-api-functions)
-  * [Using meta-accessors](#using-meta-accessors)
-    * [Caveats](#caveats-3)
-* [Managing vim internal variables](#managing-vim-internal-variables)
-  * [Using api functions](#using-api-functions-1)
-  * [Using meta-accessors](#using-meta-accessors-1)
-    * [Caveats](#caveats-4)
-* [Calling Vimscript functions](#calling-vimscript-functions)
+    * [Советы](#советы-3)
+* [Управление опции vim](#управление-опции-vim)
+  * [Использование функций API](#использование-функций-api)
+  * [Использование мета-аксессоров](#использование-мета-аксессоров)
+    * [Предостережения](#предостережения-3)
+* [Управление внутренними переменными vim](#управление-внутренними-переменными-vim)
+  * [Использование функций API](#использование-функций-api-1)
+  * [Использование мета-аксессоров](#использование-мета-аксессоров-1)
+    * [Предостережения](#предостережения-4)
+* [Вызов функций Vimscript](#вызов-функций-vimscript)
   * [vim.call()](#vimcall)
   * [vim.fn.{function}()](#vimfnfunction)
-    * [Tips](#tips-4)
-    * [Caveats](#caveats-5)
-* [Defining mappings](#defining-mappings)
-* [Defining user commands](#defining-user-commands)
-* [Defining autocommands](#defining-autocommands)
-* [Defining syntax/highlights](#defining-syntaxhighlights)
-* [General tips and recommendations](#general-tips-and-recommendations)
-  * [Setting up linters/language servers](#setting-up-linterslanguage-servers)
+    * [Советы](#советы-4)
+    * [Предостережения](#предостережения-5)
+* [Определение сопоставлений клавиш](#определение-сопоставлений-клавиш)
+* [Определение пользовательских команд](#определение-пользовательских-команд)
+* [Определение автокоманд](#определение-автокоманд)
+* [Определение синтаксиса/подсветки](#определение-синтаксисаподсветки)
+* [Общие советы и рекомендации](#общие-советы-и-рекомендации)
+  * [Настройка линтеров/языковых серверов](#настройка-линтеровязыковых-серверов)
     * [luacheck](#luacheck)
     * [sumneko/lua-language-server](#sumnekolua-language-server)
     * [coc.nvim](#cocnvim)
-* [Miscellaneous](#miscellaneous)
+* [Разное](#разное)
   * [vim.loop](#vimloop)
   * [vim.lsp](#vimlsp)
   * [vim.treesitter](#vimtreesitter)
@@ -430,7 +430,7 @@ echo map([1, 2, 3], v:lua.global_callback)
 
 Вы можете получить подсветку синтаксиса Lua внутри файлов .vim, поместив let `g: vimsyn_embed = 'l'` в свой файл конфигурации. См. `:help g:vimsyn_embed` для получения дополнительной информации об этой опции.
 
-## Пространство имёен vim
+## Пространство имён vim
 
 Neovim предоставляет глобальную переменную `vim`, которая служит точкой входа для взаимодействия с её API из Lua. Она предоставляет пользователям расширенную "стандартную библиотеку" функций, а также различные подмодули.
 
@@ -488,7 +488,7 @@ print(vim.api.nvim_eval('v:null')) -- nil
 
 **TODO**: возможно ли, чтобы `vim.api.nvim_eval()` возвращала `funcref`?
 
-#### Предосторожности
+#### Предостережения
 
 В отличие от `luaeval()`, `vim.api.nvim_eval()` не предоставляет неявную переменную `_A` для передачи данных в выражение.
 
@@ -620,7 +620,7 @@ vim.wo.number = true -- тоже самое что и vim.api.nvim_win_set_optio
 Смотрите также:
 - `:help lua-vim-internal-options`
 
-#### Предосторожности
+#### Предостережения
 
 В Lua нет эквивалента команде `:set`, вы либо устанавливаете параметр глобально, либо локально.
 
@@ -793,7 +793,7 @@ if vim.fn.has('nvim') == 1 then
 end
 ```
 
-## Определение сопоставление клавиш
+## Определение сопоставлений клавиш
 
 Neovim предоставляет список функций API для установки, получения и удаления сопоставлений:
 
@@ -894,7 +894,7 @@ Augroup-ы и autcommand-ы еще не имеют интерфейса, но н
 
 ## Общие советы и рекомендации
 
-### Настройка линтеров / языковых серверов
+### Настройка линтеров/языковых серверов
 
 Если вы используете линтеры и/или языковые серверы для диагностики и автозаполнения для проектов Lua, возможно, вам придется настроить для них параметры, специфичные для Neovim. Вот несколько рекомендуемых настроек для популярных инструментов:
 
